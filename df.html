@@ -1,0 +1,70 @@
+
+<!-- saved from url=(0038)http://web.utk.edu/~cwiek/TwoSampleDoF -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Degrees of Freedom for the Two-Sample <i>t</i>-test</title>
+   <link rel="shortcut icon" href="stC.png">
+
+<script language="JavaScript">
+<!--
+
+/* Compute DF from n1, n2, s1, s2. */
+function computeDF(form) {
+  var n1 = Number(form.n1.value);
+  var n2 = Number(form.n2.value);
+  
+  var s1 = Number(form.s1.value);
+  var s2 = Number(form.s2.value);
+  
+  if (!n1 || !n2 || !s1 || !s2) {
+    form.DF.value = ""
+  }
+  else {
+    // Compute these intermediate values.
+    var s1_squared = s1 * s1;
+    var s2_squared = s2 * s2;
+
+    var DF = Math.pow(s1_squared / n1 + s2_squared / n2, 2) /
+             ( 1 / (n1 - 1) * Math.pow( (s1_squared / n1), 2) +
+               1 / (n2 - 1) * Math.pow( (s2_squared / n2), 2) );
+
+    // Round the result to 4 decimal places.
+    form.DF.value = Math.round(DF * 10000) / 10000;
+  }
+}
+
+// -->
+</script>
+</head>
+
+
+<body>
+<h2>Compute Degrees of Freedom for the Two-Sample <i>t</i>-test/Confidence Interval</h2>
+
+Enter in the sample sizes (<i>n</i><sub>1</sub>, <i>n</i><sub>2</sub>) and 
+sample standard deviations (<i>s</i><sub>1</sub>, <i>s</i><sub>2</sub>) and 
+click "Compute df" to calculate the degrees of freedom for the <i>t</i> distribution 
+for comparing two means:
+<br>
+<img src="satterthwaite-approximation.jpg">
+
+<p>
+</p><form>
+  <table>
+    <tbody><tr>
+      <td><i>n</i><sub>1</sub>:  <input type="text" name="n1" size="6"></td>
+      <td><i>n</i><sub>2</sub>:  <input type="text" name="n2" size="6"></td>
+      <td><i>s</i><sub>1</sub>:  <input type="text" name="s1" size="6"></td>
+      <td><i>s</i><sub>2</sub>:  <input type="text" name="s2" size="6"></td>
+  
+      <td style="padding-left:3em; padding-right:1em;">
+        <input type="button" value="Compute df" onclick="computeDF(this.form)">
+      </td>
+  
+      <td>df:  <input type="text" readonly="" name="DF" size="10"></td>
+    </tr>
+  </tbody></table>
+</form>
+<br><br><br><br><br><br>
+Adapted from <a href="http://web.utk.edu/~cwiek/TwoSampleDoF">http://web.utk.edu/~cwiek/TwoSampleDoF</a>
+
+</body></html>
